@@ -20,12 +20,15 @@ Y_list <- Y_list[1:500]
 # obtain the treatment idx
 x <- as.integer(colData(airway)$dex == "trt")
 
+print("Running asymptotic test")
 asymptotic_time <- system.time({asymptotic_res <- run_mann_whitney_test_asymptotic(Y_list = Y_list,
                                                                                    x = x,
                                                                                    Z = NULL,
                                                                                    side = "two_tailed",
                                                                                    implementation = "custom",
                                                                                    alpha = 0.1)})
+
+print("Running adaptive finite sample test")
 finite_sample_adaptive_time <- system.time({finite_sample_adaptive_res <- run_mann_whitney_test_permutations(Y_list = Y_list,
                                                                                                     x = x,
                                                                                                     Z = NULL,
@@ -33,6 +36,8 @@ finite_sample_adaptive_time <- system.time({finite_sample_adaptive_res <- run_ma
                                                                                                     h = 15,
                                                                                                     alpha = 0.1,
                                                                                                     adaptive_permutation_test = TRUE)})
+
+print("Running classical finite sample test")
 finite_sample_classical_time <- system.time({finite_sample_classical_res <- run_mann_whitney_test_permutations(Y_list = Y_list,
                                                                                                      x = x,
                                                                                                      Z = NULL,
