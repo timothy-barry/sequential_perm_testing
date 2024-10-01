@@ -1,6 +1,7 @@
 library(robustDESeq)
 library(airway)
 data("airway")
+offsite_dir <- .get_config_path("LOCAL_SEQUENTIAL_TEST_DATA_DIR")
 
 # obtain the expression matrix
 expression_matrix <- assays(airway)$counts
@@ -15,7 +16,7 @@ expression_matrix_norm <- apply(X = expression_matrix, MARGIN = 1, FUN = functio
 }) |> t()
 # extract each of the genes
 Y_list <- apply(X = expression_matrix_norm, MARGIN = 1, identity, simplify = FALSE)
-# Y_list <- Y_list[1:10]
+Y_list <- Y_list[1:500]
 # obtain the treatment idx
 x <- as.integer(colData(airway)$dex == "trt")
 
@@ -38,11 +39,10 @@ finite_sample_classical_time <- system.time({finite_sample_classical_res <- run_
                                                                                                      side = "two_tailed",
                                                                                                      alpha = 0.1,
                                                                                                      adaptive_permutation_test = FALSE)})
-
 res_list <- list(asymptotic_time = asymptotic_time,
                  finite_sample_adaptive_time = finite_sample_adaptive_time,
                  finite_sample_classical_time = finite_sample_classical_time,
                  asymptotic_res = asymptotic_res,
                  finite_sample_adaptive_res = finite_sample_adaptive_res,
                  finite_sample_classical_res = finite_sample_classical_res)
-saveRDS(object = res_list, file = )
+saveRDS(object = res_list, file = paste0(offsite_dir, "airway_result.rds"))
