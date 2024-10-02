@@ -16,7 +16,7 @@ expression_matrix_norm <- apply(X = expression_matrix, MARGIN = 1, FUN = functio
 }) |> t()
 # extract each of the genes
 Y_list <- apply(X = expression_matrix_norm, MARGIN = 1, identity, simplify = FALSE)
-Y_list <- Y_list[1:5000]
+Y_list <- Y_list[1:500]
 # obtain the treatment idx
 x <- as.integer(colData(airway)$dex == "trt")
 
@@ -50,4 +50,4 @@ res_list <- list(asymptotic_time = asymptotic_time,
                  asymptotic_res = asymptotic_res,
                  finite_sample_adaptive_res = finite_sample_adaptive_res,
                  finite_sample_classical_res = finite_sample_classical_res)
-saveRDS(object = res_list, file = paste0(offsite_dir, "airway_result_5000.rds"))
+saveRDS(object = res_list, file = paste0(offsite_dir, "airway_result.rds"))
