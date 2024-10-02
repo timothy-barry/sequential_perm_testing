@@ -8,6 +8,7 @@ dir.create(path = paste0(sequential_perm_dir, "gtex/processed"))
 dir.create(path = paste0(sequential_perm_dir, "results/"))
 
 # 2. download raw data from Zenodo
+options(timeout=1e6)
 download.file(url = "https://zenodo.org/records/8320659/files/permuted%20datasets_GTEx.zip?download=1",
               destfile = paste0(sequential_perm_dir, "gtex/gtex_raw.zip"))
 unzip(zipfile = paste0(sequential_perm_dir, "gtex/gtex_raw.zip"), exdir = paste0(sequential_perm_dir, "gtex"))
