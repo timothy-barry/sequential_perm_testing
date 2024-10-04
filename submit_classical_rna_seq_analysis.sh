@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH -c 1
 #SBATCH -p shared
-#SBATCH --time=0-8:00:00
+#SBATCH --time=0-20:00:00
 #SBATCH --mem=4GB
 #SBATCH --array=1-200
 #SBATCH -o %j.out

@@ -8,7 +8,7 @@ dat <- readRDS(paste0(offsite_dir, "gtex/processed/adipose_processed.rds"))
 x <- dat$labels_binary
 Y_list <- dat$Y_list
 #B <- as.integer(round(10 * length(Y_list)/0.1))
-B <- as.integer(round(length(Y_list)/0.1))
+B <- as.integer(5 * round(length(Y_list)/0.1))
 
 # extract the hypotheses to test
 set.seed(1)
