@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -c 1
-#SBATCH -p shared
+#SBATCH -p short
 #SBATCH --time=0-1:00:00
 #SBATCH --mem=4GB
 #SBATCH -o %j.out

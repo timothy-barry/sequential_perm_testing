@@ -11,7 +11,7 @@ B <- as.integer(5 * round(length(Y_list)/0.1))
 
 # extract the hypotheses to test
 set.seed(1)
-n_groups <- 200L
+n_groups <- 50L
 ids <- sample(rep(seq(1L, n_groups), length.out = length(Y_list)))
 Y_list_sub <- Y_list[ids == i]
 

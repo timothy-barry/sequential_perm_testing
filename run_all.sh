@@ -5,7 +5,12 @@
 #SBATCH --mem=4GB
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-Rscript ./download_and_process_data.R
-sbatch --wait submit_fast_rna_seq_analysis.sh
+
+module load gcc/14.2.0
+module load R/4.4.2
+module load conda/miniforge3/24.11.3-0
+
+#Rscript ./download_and_process_data.R
+#sbatch --wait submit_fast_rna_seq_analysis.sh
 sbatch --wait submit_classical_rna_seq_analysis.sh
-Rscript ./analyze_results.R
+#Rscript ./analyze_results.R
