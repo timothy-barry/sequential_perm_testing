@@ -3,10 +3,9 @@ offsite_dir <- .get_config_path("LOCAL_SEQUENTIAL_TEST_DATA_DIR")
 result_dir <- paste0(offsite_dir, "results/")
 
 # slow res
-fs <- list.files(result_dir, pattern = "classical_")
+fs <- list.files(result_dir, pattern = "^classical_res_[0-9]+\\.rds$")
 # ensure all files present
-f_names <- paste0("classical_res_", seq(1, 200), ".rds")
-all(sort(fs) == sort(f_names))
+f_names <- sort(fs)
 
 # load the files and process the results
 res_list <- lapply(paste0(result_dir, f_names), FUN = function(f) readRDS(f))
@@ -20,9 +19,9 @@ seconds_to_period(total_s)
 classical_result_df <- result_df |> dplyr::arrange(gene_id)
 
 # Besag-Clifford results (parallelized)
-bc_fs <- list.files(result_dir, pattern = "bc_")
-bc_f_names <- paste0("bc_res_", seq(1, 200), ".rds")
-all(sort(bc_fs) == sort(bc_f_names))
+bc_fs <- list.files(result_dir, pattern = "^bc_res_[0-9]+\\.rds$")
+bc_f_names <- sort(bc_fs)
+stopifnot(length(bc_f_names) == length(f_names))
 bc_res_list <- lapply(paste0(result_dir, bc_f_names), FUN = function(f) readRDS(f))
 bc_result_df <- lapply(bc_res_list, FUN = function(r) r$finite_sample_bc_res) |>
   data.table::rbindlist()
